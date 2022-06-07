@@ -1,2 +1,3 @@
 print("this is main")
-import print_comments
+#import tkinterlab
+import game
