@@ -84,3 +84,7 @@ for n in range(80,31, -8):
 
 for number in range(1,5):
   print (number**2)'''
+
+#import boolean_examples
+#import boolean_lab
+#import conditionals
