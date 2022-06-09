@@ -1,6 +1,7 @@
 print("this is main")
 #import tkinterlab
-#import game
+import game
+#import functions_lab
 '''fruit=["blueberry", "apple", "watermelon", "raspberry", "pineapple", "banana", "orange", "strawberry", "grapes", "peach"]
 print(len(fruit))
 print(fruit[2])
@@ -50,5 +51,36 @@ print(my_friends[-1])
 print(my_friends[5: 8])
 print(my_friends[5: ])
 print(my_friends[ : 3])
-print(my_friends[0: : 2])'''
-import data_structures
+print(my_friends[0: : 2])
+print(my_friends[: : -3])
+my_friends[8] = "elizabeth"
+print(my_friends)
+my_friends.append('Danny')
+print(my_friends)
+del my_friends[8]
+print(my_friends)'''
+#import loops
+#import data_structures
+#import functions
+
+#name = "Betty"
+#for c in name: 
+ # print(c, end=" ")
+
+#names = ["Erin", "Gini", "Bob", "Ryan"]
+
+
+'''numbers = [89, 41, 73, 90]
+for number in [89, 41, 73, 90]: print(number)
+
+for number in range(5,15):
+  print(number)
+
+for number in range(100, 201, 10):
+  print (number)
+
+for n in range(80,31, -8):
+  print (n)
+
+for number in range(1,5):
+  print (number**2)'''

@@ -23,7 +23,7 @@ canvas = Canvas(window, width=size_of_board, height=size_of_board)
 canvas.pack()
 window.mainloop(30)
 #1st row
-canvas.create_line(50, 50, 550, 50, fill="gray", dash=(2, 2))
+'''canvas.create_line(50, 50, 550, 50, fill="gray", dash=(2, 2))
 #2nd row
 canvas.create_line(50, 150, 550, 150, fill="gray", dash=(2,2))
 #3rd row
@@ -46,4 +46,14 @@ canvas.create_line(350, 50, 350, 550, fill="gray", dash=(2,2))
 #5th column
 canvas.create_line(450, 50, 450, 550, fill="gray", dash=(2,2))
 #6th column
-canvas.create_line(550, 50, 550, 550, fill="gray", dash=(2,2))
+canvas.create_line(550, 50, 550, 550, fill="gray", dash=(2,2))'''
+
+for i in range (50, 650, 100):
+  canvas.create_line(50, i, 550, i, fill="gray", dash=(2,2))
+  canvas.create_line(i, 50, i, 550, fill="gray", dash=(2,2))
+
+for i in range(6):
+  for j in range(6):
+    start_x = i * 100 + 50
+    end_x = j * 100 + 50
+    canvas.create_oval(start_x - dots_width/2, end_x - dots_width/2, start_x + dots_width/2, end_x + dots_width/2, fill=dot_color, outline=dot_color)
