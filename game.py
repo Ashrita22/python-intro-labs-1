@@ -30,8 +30,27 @@ def draw_board(canvas):
       end_x = j * 100 + 50
       canvas.create_oval(start_x - dots_width/2, end_x - dots_width/2, start_x + dots_width/2, end_x + dots_width/2, fill=dot_color, outline=dot_color)
 
+def isEven(n):
+            return n % 2 == 0
+
+def get_logical_position(x, y):
+  xlog = (x - 25) // 50
+  ylog = (y - 25) // 50
+  pos = []
+  direction = ""
+  #rows have (odd, even)
+  if(isEven(xlog) == False and isEven(ylog) == True):
+    direction = "row"
+    pos = [xlog, ylog]
+  #(even, odd)
+  elif(isEven(xlog) == True and isEven(ylog) == False):
+    direction = "col"
+    pos = [xlog, ylog]
+  return pos, direction
+
 def handle_click(e):
-  print("someone clicked", e.x, e.y)
+  pos, direction = get_logical_position(e.x, e.y)
+  print(pos, direction)
 
 #Initialization
 window = Tk()
