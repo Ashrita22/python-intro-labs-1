@@ -9,6 +9,7 @@ dot_color = '#7BC043' #r123, g192, b 43
 player1_color = '#A0DDFF' #A0DDFF
 player1_color_light = '#758ECD' #758ECD
 player2_color = '#C1CEFE' #C1CEFE
+player2_color_light = '#52489C'
 Green_color = '#7189FF' #7189FF
 distance_between_dots = size_of_board / number_of_dots
 dots_width = (1/4 * (size_of_board / number_of_dots))
@@ -107,10 +108,79 @@ def mark_line(pos, direction):
 
   canvas.create_line(start_x, start_y, end_x, end_y, fill=color, width=edge_width)
 
+def shade_box(box):
+  start_x = 50 + (((box[0][0] -1) //2)  * 100) + edge_width/2
+  start_y = 50 + (((box[3][1] -1) //2)  * 100) + edge_width/2
+  end_x = start_x + 100 - edge_width
+  end_y = start_y + 100 - edge_width
 
+  if player_turn == 1:
+      color = player1_color_light
+  else:
+      color = player2_color_light
+
+  canvas.create_rectangle(start_x, start_y, end_x, end_y, fill=color, outline='')
+
+def check_completes_box(pos):
+  completing_boxes = 0
+  for box in boxes:
+    if pos in box:
+      line_found_count = 0
+      for line in box:
+        if line in marked_lines:
+          line_found_count += 1
+      if(line_found_count == 4):
+        shade_box(box)
+        completing_boxes += 1
+  return completing_boxes
+    
+write_turn = ""
+write_points = ""
 def handle_click(e):
+  global player1_points
+  global player2_points
+  global player_turn
+  global write_turn
+  global write_points
   pos, direction = get_logical_position(e.x, e.y)
-  mark_line(pos, direction)
+  if direction == "":
+    return
+  if(not pos in marked_lines):
+    mark_line(pos, direction)
+    marked_lines.append(pos)
+  else:
+    return
+
+  boxes_completed = check_completes_box(pos)
+  print(boxes_completed)
+  if boxes_completed > 0:
+    if(player_turn == 1):
+      player1_points = player1_points + boxes_completed
+    else: 
+      player2_points = player2_points + boxes_completed
+    canvas.delete(write_points)
+    write_points = canvas.create_text(550, 20, text="P1: "+ str(player1_points) + " | P2: " + str(player2_points))
+  else:
+    if player_turn == 1:
+      player_turn = 2
+      canvas.delete(write_turn)
+      write_turn = canvas.create_text(60, 20, text="Player 2's Turn", fill=player2_color)
+    else: 
+      player_turn = 1
+      canvas.delete(write_turn)
+      write_turn = canvas.create_text(60, 20, text="Player 1's Turn", fill=player1_color)
+  if(len(marked_lines) == 60):
+    canvas.delete(write_turn)
+    winner_string = "It's a Tie!"
+    if(player1_points > player2_points):
+      winner_string = "Player 1 Wins!"
+      color = player1_color
+    elif(player2_points > player1_points):
+      winner_string = "Player2 Wins!"
+      color = player2_color
+    canvas.create_text(250, 20, text=winner_string, fill=color)
+
+ 
 
   
 #Initialization
