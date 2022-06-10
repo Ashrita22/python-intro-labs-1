@@ -84,8 +84,8 @@ def get_logical_position(x, y):
   return pos, direction
 
 
-  def mark_line(pos, direction):
-    global player_turn
+def mark_line(pos, direction):
+  global player_turn
   if direction == "row":
     r = int((pos[0] -1) // 2)
     c = int((pos[1]//2))
